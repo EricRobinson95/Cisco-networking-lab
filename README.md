@@ -1,2 +1,2 @@
 # Cisco-enterprise-networking-lab
-Cisco enterprise networking lab built in Cisco Packet Tracer demonstrating VLANs, inter-VLAN routing, ACLs, DHCP, switch security, static routing, and Cisco IOS troubleshooting.
+This project demonstrates the design, configuration, and troubleshooting of a simulated enterprise network using Cisco Packet Tracer. The lab implements VLAN segmentation, inter-VLAN routing, DHCP, ACLs, switch security, static routing, and Cisco IOS administration to emulate a small business network infrastructure.
