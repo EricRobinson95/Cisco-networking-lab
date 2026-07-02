@@ -2,13 +2,15 @@
 
 ## Overview
 
-This project demonstrates the design, implementation, and documentation of a simulated enterprise network using Cisco Packet Tracer. The lab replicates a small business environment and focuses on core networking concepts including VLANs, inter-VLAN routing, DHCP, Access Control Lists (ACLs), switch security, static routing, and Cisco IOS administration.
+This project documents the design, implementation, and validation of a simulated enterprise network using Cisco Packet Tracer. The goal is to build a secure and scalable business network while reinforcing networking concepts covered in the Cisco Certified Network Associate (CCNA) certification.
+
+The project is being developed in phases, with each implementation step documented using Git and GitHub.
 
 ---
 
 ## Business Scenario
 
-Robinson Technology Solutions is a fictional small business that requires a secure, scalable, and segmented network infrastructure. The network is designed to support multiple departments while providing centralized services through a Windows Server 2022 domain controller.
+Robinson Technology Solutions is a fictional small business that requires a secure, scalable, and well-organized network infrastructure. The network is designed to support multiple departments while providing centralized network services through a Windows Server 2022 domain controller.
 
 Departments include:
 
@@ -26,43 +28,101 @@ Departments include:
 
 ---
 
-## Project Progress
+## Skills Demonstrated
 
-### ✅ Phase 1 – Network Design
+- Enterprise Network Design
+- Cisco IOS Administration
+- Cisco Router and Switch Configuration
+- Layer 2 Switching
+- Layer 3 Switching
+- Network Documentation
+- Git Version Control
+- GitHub Project Management
 
-Completed:
-
-- Designed the enterprise network topology in Cisco Packet Tracer
-- Implemented a hierarchical network architecture
-- Added an ISP, edge router, core multilayer switch, and access switches
-- Organized departmental endpoints
-- Added a Windows Server 2022 host to represent enterprise infrastructure
-- Established the GitHub repository structure
-- Uploaded the initial network topology
-- Configured Git for version control and documentation
+> Additional skills including VLANs, Inter-VLAN Routing, DHCP, ACLs, Static Routing, and Switch Security will be implemented throughout the project.
 
 ---
 
-## Technologies
+## Technologies Used
 
 - Cisco Packet Tracer
 - Cisco IOS
-- Layer 2 Switching
-- Layer 3 Switching
-- VLANs
-- Inter-VLAN Routing
-- DHCP
-- ACLs
-- Static Routing
+- Windows Server 2022
 - Git
 - GitHub
+- Visual Studio Code
 
 ---
 
-## Project Status
+## Repository Structure
 
-🟡 In Progress
+```text
+Cisco-networking-lab/
+│
+├── configurations/
+├── diagrams/
+├── documentation/
+├── images/
+├── packet-tracer/
+├── scripts/
+├── README.md
+└── LICENSE
+```
 
-**Current Phase:** Network Design
+---
 
-**Next Phase:** Basic Device Configuration and VLAN Implementation
+## Project Progress
+
+### ✅ Completed
+
+- Designed the enterprise network topology
+- Implemented a hierarchical network architecture
+- Added the enterprise router, Layer 3 core switch, access switches, and Windows Server
+- Organized departmental endpoints
+- Configured baseline Cisco device settings
+  - Hostnames
+  - Enable secret
+  - Service password encryption
+  - Disable DNS lookup
+  - MOTD banner
+  - Console access
+  - VTY access
+  - Saved startup configurations
+- Created and organized the GitHub repository
+- Exported baseline device configurations
+- Began project documentation
+
+### 🚧 In Progress
+
+- Physical network cabling
+- IP addressing design
+
+### 📋 Planned
+
+- VLAN implementation
+- Inter-VLAN routing
+- DHCP configuration
+- Static routing
+- Access Control Lists (ACLs)
+- Switch port security
+- Network verification
+- Troubleshooting
+
+---
+
+## Documentation
+
+Detailed implementation documentation for each phase of the project can be found in the `documentation/` directory.
+
+Current documentation includes:
+
+- Lab Overview
+- Network Design
+
+Additional documentation will be added as each implementation phase is completed.
+
+---
+
+## License
+
+This project is licensed under the MIT License.
