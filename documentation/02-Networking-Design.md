@@ -46,7 +46,7 @@ Each department will later be assigned its own VLAN and IP subnet to improve sec
 | Access Switches | ACC-SW1, ACC-SW2, ACC-SW3 |
 | Domain Controller | SRV-DC01 |
 | Human Resources | HR-PC01, HR-LT01 |
-| Finance | FIN-PC01, FIN-LT02 |
+| Finance | FIN-PC01, FIN-LT01 |
 | Information Technology | IT-PC01, IT-PC02, IT-LT01 |
 | Management | MGMT-PC01, MGMT-LT01 |
 
