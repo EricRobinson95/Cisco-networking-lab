@@ -129,8 +129,8 @@
         <mxCell id="HQMXMfczDyNlfQodfAvz-41" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;fontSize=12;" value="SRV DC01" vertex="1">
           <mxGeometry height="10" width="60" x="370.01" y="720" as="geometry" />
         </mxCell>
-        <mxCell id="XVrmgv3D7Ls_zpOJ7r-V-2" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;fontSize=16;" value="Enterprise Network Physical Topology" vertex="1">
-          <mxGeometry height="40" width="395" x="240" y="120" as="geometry" />
+        <mxCell id="XVrmgv3D7Ls_zpOJ7r-V-2" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;fontSize=24;" value="Enterprise Network Physical Topology" vertex="1">
+          <mxGeometry height="120" width="492" x="154.01" y="20" as="geometry" />
         </mxCell>
         <mxCell id="XVrmgv3D7Ls_zpOJ7r-V-10" parent="1" style="whiteSpace=wrap;html=1;" value="" vertex="1">
           <mxGeometry height="30" width="70" x="365" y="600" as="geometry" />
