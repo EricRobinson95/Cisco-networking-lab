@@ -1,6 +1,7 @@
+CORE-SW1#sho run
 Building configuration...
 
-Current configuration : 1424 bytes
+Current configuration : 2024 bytes
 !
 version 12.2(37)SE1
 no service timestamps log datetime msec
@@ -16,6 +17,8 @@ enable secret 5 $1$mERr$8mh47LEm26L.xWv1OmZag1
 !
 !
 !
+!
+ip routing
 !
 !
 !
@@ -40,8 +43,10 @@ spanning-tree mode pvst
 !
 !
 interface FastEthernet0/1
+ description Connected to ACC-SW1 Fa0/1
 !
 interface FastEthernet0/2
+ description Connected to ACC-SW3 Fa0/1
 !
 interface FastEthernet0/3
 !
@@ -88,12 +93,34 @@ interface FastEthernet0/23
 interface FastEthernet0/24
 !
 interface GigabitEthernet0/1
+ description Connected to RTR1 Gi0/0
 !
 interface GigabitEthernet0/2
+ description Connected to ACC-SW2 Gi0/1
 !
 interface Vlan1
  no ip address
  shutdown
+!
+interface Vlan10
+ mac-address 000a.4163.9901
+ ip address 192.168.10.1 255.255.255.0
+!
+interface Vlan20
+ mac-address 000a.4163.9902
+ ip address 192.168.20.1 255.255.255.0
+!
+interface Vlan30
+ mac-address 000a.4163.9903
+ ip address 192.168.30.1 255.255.255.0
+!
+interface Vlan40
+ mac-address 000a.4163.9904
+ ip address 192.168.40.1 255.255.255.0
+!
+interface Vlan50
+ mac-address 000a.4163.9905
+ ip address 192.168.50.1 255.255.255.0
 !
 ip classless
 !

@@ -1,6 +1,7 @@
+ACC-SW3#sho run
 Building configuration...
 
-Current configuration : 1334 bytes
+Current configuration : 1590 bytes
 !
 version 15.0
 no service timestamps log datetime msec
@@ -21,14 +22,24 @@ spanning-tree mode pvst
 spanning-tree extend system-id
 !
 interface FastEthernet0/1
+ description Connected to CORE-SW1 Fa0/2
+ switchport mode trunk
 !
 interface FastEthernet0/2
+ description IT-PC01
+ switchport access vlan 30
 !
 interface FastEthernet0/3
+ description IT-LT01
+ switchport access vlan 30
 !
 interface FastEthernet0/4
+ description IT-PC02
+ switchport access vlan 30
 !
 interface FastEthernet0/5
+ description IT-LT02
+ switchport access vlan 30
 !
 interface FastEthernet0/6
 !
