@@ -1,6 +1,6 @@
 <mxfile host="app.diagrams.net">
   <diagram name="Page-1" id="nrHBfVMkrXwOKs-d-XcE">
-    <mxGraphModel dx="1225" dy="1122" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="793" dy="726" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -118,28 +118,28 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="HQMXMfczDyNlfQodfAvz-4" parent="1" style="whiteSpace=wrap;html=1;" value="" vertex="1">
-          <mxGeometry height="30" width="70" x="270" y="600" as="geometry" />
+          <mxGeometry height="30" width="90" x="260" y="600" as="geometry" />
         </mxCell>
         <mxCell id="HQMXMfczDyNlfQodfAvz-8" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;fontSize=10;" value="ACC-SW1&lt;div&gt;(Catalyst2960)&lt;/div&gt;" vertex="1">
           <mxGeometry width="48.75" x="280.63" y="615" as="geometry" />
         </mxCell>
         <mxCell id="HQMXMfczDyNlfQodfAvz-23" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="" vertex="1">
-          <mxGeometry height="50" width="40" x="379.38" y="700" as="geometry" />
+          <mxGeometry height="50" width="80" x="360" y="700" as="geometry" />
         </mxCell>
-        <mxCell id="HQMXMfczDyNlfQodfAvz-41" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;fontSize=12;" value="SRV DC01" vertex="1">
-          <mxGeometry height="10" width="60" x="370.01" y="720" as="geometry" />
+        <mxCell id="HQMXMfczDyNlfQodfAvz-41" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;fontSize=12;" value="SRV-DC01" vertex="1">
+          <mxGeometry height="10" width="69.99" x="365.02" y="705" as="geometry" />
         </mxCell>
         <mxCell id="XVrmgv3D7Ls_zpOJ7r-V-2" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;fontSize=24;" value="Enterprise Network Physical Topology" vertex="1">
           <mxGeometry height="120" width="492" x="154.01" y="20" as="geometry" />
         </mxCell>
         <mxCell id="XVrmgv3D7Ls_zpOJ7r-V-10" parent="1" style="whiteSpace=wrap;html=1;" value="" vertex="1">
-          <mxGeometry height="30" width="70" x="365" y="600" as="geometry" />
+          <mxGeometry height="30" width="80" x="360" y="600" as="geometry" />
         </mxCell>
         <mxCell id="XVrmgv3D7Ls_zpOJ7r-V-11" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;fontSize=10;" value="ACC-SW2&lt;div&gt;&lt;div&gt;(Catalyst2960)&lt;/div&gt;&lt;/div&gt;" vertex="1">
-          <mxGeometry width="48.75" x="375.63" y="615" as="geometry" />
+          <mxGeometry width="44.38" x="380" y="615" as="geometry" />
         </mxCell>
         <mxCell id="XVrmgv3D7Ls_zpOJ7r-V-12" parent="1" style="whiteSpace=wrap;html=1;" value="" vertex="1">
-          <mxGeometry height="30" width="70" x="455" y="600" as="geometry" />
+          <mxGeometry height="30" width="80" x="450" y="600" as="geometry" />
         </mxCell>
         <mxCell id="XVrmgv3D7Ls_zpOJ7r-V-13" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;fontSize=10;" value="ACC-SW3&lt;div&gt;(Catalyst2960)&lt;/div&gt;" vertex="1">
           <mxGeometry width="48.75" x="465.63" y="615" as="geometry" />
@@ -189,7 +189,7 @@
         <mxCell id="XVrmgv3D7Ls_zpOJ7r-V-28" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;fontSize=8&#xa;;" value="MGMT-PC01" vertex="1">
           <mxGeometry height="30" width="70" x="365.01" y="635" as="geometry" />
         </mxCell>
-        <mxCell id="XVrmgv3D7Ls_zpOJ7r-V-29" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;fontSize=8&#xa;;" value="MGMT-PC01" vertex="1">
+        <mxCell id="XVrmgv3D7Ls_zpOJ7r-V-29" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;fontSize=8&#xa;;" value="MGMT-LT01" vertex="1">
           <mxGeometry height="30" width="70" x="364.38" y="665" as="geometry" />
         </mxCell>
         <mxCell id="XVrmgv3D7Ls_zpOJ7r-V-31" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;fontSize=10;" value="IT-PC01" vertex="1">
@@ -203,6 +203,15 @@
         </mxCell>
         <mxCell id="XVrmgv3D7Ls_zpOJ7r-V-34" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;fontSize=10;" value="IT-LT02" vertex="1">
           <mxGeometry height="30" width="60.62" x="459.07" y="725" as="geometry" />
+        </mxCell>
+        <mxCell id="XVrmgv3D7Ls_zpOJ7r-V-35" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;fontSize=16;" value="Version: 1.0&lt;div&gt;July 2026&lt;/div&gt;" vertex="1">
+          <mxGeometry height="90" width="170" x="520.31" y="770" as="geometry" />
+        </mxCell>
+        <mxCell id="XVrmgv3D7Ls_zpOJ7r-V-36" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;fontSize=7;" value="Windows Server 2022" vertex="1">
+          <mxGeometry height="25" width="90" x="354.38" y="715" as="geometry" />
+        </mxCell>
+        <mxCell id="XVrmgv3D7Ls_zpOJ7r-V-38" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;fontSize=16;" value="Robinson Technology Solutions" vertex="1">
+          <mxGeometry height="60" width="300" x="250" y="90" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
