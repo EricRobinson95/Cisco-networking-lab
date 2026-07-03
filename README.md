@@ -35,7 +35,7 @@ The project focuses on implementing enterprise networking best practices while d
 
 ## Physical Topology
 
-![Physical Topology](images/topology/enterprise-network-physical-topology.png)
+![Physical Topology](images/topology/physical-topology.png)
 
 ---
 
