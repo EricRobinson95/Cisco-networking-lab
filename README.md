@@ -1,44 +1,59 @@
 # Cisco Enterprise Networking Lab
 
-## Overview
-
-This project demonstrates the design, implementation, and documentation of a simulated enterprise network using Cisco Packet Tracer. The objective is to build a secure and scalable small business network while applying networking concepts commonly found in enterprise environments.
-
-The project is being developed as both a CCNA learning lab and a professional networking portfolio. Each phase is documented to explain the design decisions, Cisco IOS configurations, verification procedures, and troubleshooting process.
+A hands-on enterprise networking project built in Cisco Packet Tracer to demonstrate core networking concepts, Layer 2 and Layer 3 switching, VLAN segmentation, DHCP deployment, and enterprise network documentation.
 
 ---
 
-## Business Scenario
+# Project Overview
 
-Robinson Technology Solutions is a fictional small business that requires a reliable and secure network infrastructure to support multiple departments and centralized services.
+This lab simulates a small enterprise environment with multiple departments connected through a hierarchical network design.
 
-The network is designed to provide:
-
-- Departmental network segmentation using VLANs
-- Layer 3 switching with Inter-VLAN Routing
-- Centralized Windows Server 2022 services
-- Dynamic IP addressing (DHCP)
-- Network security using ACLs and switch security
-- Enterprise-style documentation and verification
+The project focuses on implementing enterprise networking best practices while documenting every phase of deployment, verification, and troubleshooting.
 
 ---
 
-## Enterprise Network Topology
+# Technologies Used
 
-![Enterprise Network Topology](images/topology/physical-topology.png)
+- Cisco Packet Tracer
+- Cisco Catalyst 3560 Layer 3 Switch
+- Cisco Catalyst 2960 Access Switches
+- Cisco 2911 Router
+- VLANs
+- 802.1Q Trunking
+- Inter-VLAN Routing
+- Static IP Addressing
+- DHCP
+- DHCP Relay (`ip helper-address`)
+- Draw.io
+- Git
+- GitHub
+- VS Code
 
 ---
 
-## Network Architecture
+# Enterprise Network Topology
 
-The network follows a hierarchical enterprise design consisting of:
+## Physical Topology
 
-- ISP Connection
-- Edge Router (RTR1)
-- Core Layer 3 Switch (CORE-SW1)
-- Three Access Layer Switches
-- Windows Server 2022
-- Departmental End Devices
+![Physical Topology](images/topology/enterprise-network-physical-topology.png)
+
+---
+
+## Inter-VLAN Routing
+
+![Inter-VLAN Routing](images/vlan/inter-vlan-routing.png)
+
+---
+
+# Network Design
+
+The enterprise network consists of:
+
+- 1 Cisco 2911 Edge Router
+- 1 Cisco Catalyst 3560 Layer 3 Core Switch
+- 3 Cisco Catalyst 2960 Access Switches
+- Windows Server (Packet Tracer Server)
+- Multiple department PCs and laptops
 
 Departments include:
 
@@ -46,136 +61,123 @@ Departments include:
 - Finance
 - Information Technology
 - Management
-- Server Infrastructure
+- Servers
 
 ---
 
-## Technologies Used
+# VLAN Design
 
-- Cisco Packet Tracer
-- Cisco IOS
-- Layer 2 Switching
-- Layer 3 Switching
-- VLANs
-- 802.1Q Trunking
-- Inter-VLAN Routing
-- Static IPv4 Addressing
-- DHCP (Planned)
-- Access Control Lists (ACLs)
-- Switch Security
-- Static Routing
-- Git
-- GitHub
-- Markdown
+| VLAN | Department | Network | Gateway |
+|------:|------------|----------------|----------------|
+| 10 | HR | 192.168.10.0/24 | 192.168.10.1 |
+| 20 | Finance | 192.168.20.0/24 | 192.168.20.1 |
+| 30 | IT | 192.168.30.0/24 | 192.168.30.1 |
+| 40 | Management | 192.168.40.0/24 | 192.168.40.1 |
+| 50 | Servers | 192.168.50.0/24 | 192.168.50.1 |
 
 ---
 
-## Project Progress
+# Current Features
 
-### ✅ Completed
+✅ Physical Enterprise Topology
 
-- Enterprise network topology designed
-- Physical network cabling completed
-- Cisco IOS baseline device configuration
-- Interface descriptions configured
-- VLAN implementation
-- Access port assignments
-- 802.1Q trunk configuration
-- Switch Virtual Interfaces (SVIs)
-- Inter-VLAN Routing
-- Static IP Addressing
-- End-to-end connectivity verification
+✅ Layer 2 Switching
 
-### 🚧 In Progress
+✅ Layer 3 Switching
 
-- Documentation
-- Windows Server 2022 Integration
+✅ VLAN Segmentation
 
-### 📅 Planned
+✅ Access Port Configuration
 
-- DHCP Configuration
-- Access Control Lists (ACLs)
-- Switch Security
-- Static Routing
-- Final Network Verification
-- Troubleshooting Documentation
+✅ 802.1Q Trunk Links
+
+✅ Interface Descriptions
+
+✅ Inter-VLAN Routing
+
+✅ Static IP Addressing
+
+✅ DHCP Server Configuration
+
+✅ DHCP Relay (`ip helper-address`)
+
+✅ End-to-End Network Verification
 
 ---
 
-## Repository Structure
+# Documentation
 
-```text
+| File | Description |
+|------|-------------|
+| 01-Lab-Overview.md | Project overview and objectives |
+| 02-Networking-Design.md | Enterprise network architecture |
+| 03-IP-Addressing.md | IP addressing plan |
+| 04-VLAN-Configuration.md | VLAN creation and access ports |
+| 05-InterVLAN-Routing.md | Layer 3 switching and routing |
+| 06-DHCP.md | DHCP server and relay configuration |
+| 10-Network-Verification.md | Connectivity and verification testing |
+
+---
+
+# Repository Structure
+
+```
 Cisco-networking-lab/
 │
 ├── configurations/
-├── documentation/
 ├── diagrams/
 ├── images/
 ├── packet-tracer/
-└── scripts/
+├── documentation/
+└── README.md
 ```
 
-### Folder Description
+---
 
-| Folder | Description |
-|---------|-------------|
-| configurations | Cisco router and switch running configurations |
-| documentation | Step-by-step implementation and technical documentation |
-| diagrams | Network diagrams and topology files |
-| images | Project screenshots and verification images |
-| packet-tracer | Cisco Packet Tracer project files |
-| scripts | Useful Cisco IOS commands and reference material |
+# Verification Completed
+
+- Successful DHCP lease assignment
+- Successful Inter-VLAN Routing
+- Cross-VLAN connectivity
+- DHCP Relay functionality
+- Gateway verification
+- DNS assignment verification
 
 ---
 
-## Documentation
+# Project Status
 
-| Document | Description |
-|----------|-------------|
-| 01-Lab-Overview.md | Project overview and objectives |
-| 02-Networking-Design.md | Enterprise network design and topology |
-| 03-IP-Addressing.md | IPv4 addressing plan and gateway design |
-| 04-VLAN-Configuration.md | VLAN creation, access ports, and trunking |
-| 05-InterVLAN-Routing.md | Layer 3 switching and routing between VLANs |
-| 06-DHCP.md | DHCP implementation |
-| 07-Access-Control-Lists.md | Network security using ACLs |
-| 08-Switch-Security.md | Layer 2 security features |
-| 09-Static-Routing.md | Static routing configuration |
-| 10-Network-Verification.md | Connectivity testing and verification |
-| 11-Troubleshooting.md | Troubleshooting process and resolutions |
+| Phase | Status |
+|--------|--------|
+| Enterprise Topology | ✅ Complete |
+| VLAN Configuration | ✅ Complete |
+| Inter-VLAN Routing | ✅ Complete |
+| Static IP Addressing | ✅ Complete |
+| DHCP Deployment | ✅ Complete |
+| Network Verification | ✅ Complete |
+| Network Security | ⏳ Upcoming |
+| ACL Implementation | ⏳ Upcoming |
+| Final Validation | ⏳ Upcoming |
 
 ---
 
-## Skills Demonstrated
+# Future Enhancements
 
-- Enterprise Network Design
-- Cisco IOS Administration
-- Layer 2 Switching
-- Layer 3 Switching
-- VLAN Configuration
-- 802.1Q Trunking
-- Inter-VLAN Routing
-- IPv4 Addressing
-- Network Verification
-- Configuration Documentation
-- Version Control with Git & GitHub
+- SSH Remote Management
+- Switch Hardening
+- Port Security
+- Access Control Lists (ACLs)
+- DNS Services
+- Active Directory
+- Windows Server Integration
+- Enterprise Security Best Practices
 
 ---
 
-## Current Status
+# Author
 
-**Status:** 🟡 In Progress
+Eric Robinson
 
-The core enterprise network has been successfully implemented with VLAN segmentation, trunking, Layer 3 switching, static IP addressing, and verified end-to-end connectivity.
+Networking Portfolio Project
 
-The next phase of the project focuses on implementing Windows Server 2022 services, DHCP, network security, and final validation.
-
----
-
-## Author
-
-**Eric Robinson**
-
-Enterprise Networking Portfolio Project
-
-Built using Cisco Packet Tracer as part of CCNA preparation and hands-on networking practice.
+Built to demonstrate enterprise networking skills using Cisco technologies, GitHub documentation, and infrastructure design.

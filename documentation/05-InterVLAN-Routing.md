@@ -4,9 +4,9 @@
 
 This document describes the implementation of Inter-VLAN Routing within the enterprise network.
 
-Since each department is assigned to its own VLAN, devices located in different VLANs cannot communicate through Layer 2 switching alone. To enable communication between departments, the Cisco Catalyst 3560 multilayer switch (CORE-SW1) performs Layer 3 routing using Switch Virtual Interfaces (SVIs).
+Each department resides in its own VLAN and IPv4 subnet. Because VLANs are separate Layer 2 broadcast domains, devices in different VLANs cannot communicate without a Layer 3 device.
 
-This implementation provides efficient routing between VLANs while eliminating the need for a traditional Router-on-a-Stick configuration.
+A Cisco Catalyst 3560 multilayer switch (CORE-SW1) performs Layer 3 routing using Switch Virtual Interfaces (SVIs), allowing communication between all authorized VLANs while maintaining logical network separation.
 
 ---
 
@@ -16,72 +16,94 @@ The goals of the Inter-VLAN Routing implementation were to:
 
 - Enable communication between separate VLANs
 - Configure Layer 3 routing on the core switch
-- Configure default gateways for every VLAN
+- Configure Switch Virtual Interfaces (SVIs)
+- Configure default gateways for each VLAN
 - Verify end-to-end connectivity
-- Prepare the network for enterprise services such as DHCP and Active Directory
+- Support centralized enterprise services such as DHCP
 
 ---
 
 # Layer 3 Switch
 
-The Cisco Catalyst 3560 multilayer switch (CORE-SW1) performs both Layer 2 switching and Layer 3 routing.
+CORE-SW1 serves as both the Layer 2 switching device and the Layer 3 routing device for the enterprise network.
 
 Responsibilities include:
 
 - Routing traffic between VLANs
 - Hosting Switch Virtual Interfaces (SVIs)
-- Acting as the default gateway for every subnet
+- Acting as the default gateway for each subnet
 - Maintaining the routing table
+- Relaying DHCP requests to the centralized DHCP server
 
 ---
 
 # Switch Virtual Interfaces (SVIs)
 
-An SVI is a virtual Layer 3 interface associated with a VLAN.
-
-Each VLAN was assigned an SVI that serves as the default gateway for devices within that subnet.
+Each VLAN was assigned an SVI that functions as the default gateway for devices within that subnet.
 
 | VLAN | Department | Gateway |
-|------:|------------|---------|
+|------:|------------|----------------|
 | 10 | Human Resources | 192.168.10.1 |
 | 20 | Finance | 192.168.20.1 |
 | 30 | Information Technology | 192.168.30.1 |
 | 40 | Management | 192.168.40.1 |
-| 50 | Server Infrastructure | 192.168.50.1 |
+| 50 | Servers | 192.168.50.1 |
 
 ---
 
 # IP Routing
 
-Layer 3 routing was enabled on CORE-SW1 using the Cisco IOS command:
+Layer 3 routing was enabled using:
 
 ```cisco
 ip routing
 ```
 
-Enabling IP routing allows the multilayer switch to forward packets between different VLANs.
+Once enabled, CORE-SW1 routes packets between all configured VLANs.
 
-Without this command, communication would only be possible within the same VLAN.
+Without IP routing, communication would only be possible between devices located in the same VLAN.
 
 ---
 
 # Routing Process
 
-When a device communicates with another device located in a different VLAN, the following process occurs:
+When a device communicates with another VLAN, the following occurs:
 
-1. The source device sends traffic to its default gateway.
-2. The SVI on CORE-SW1 receives the packet.
-3. CORE-SW1 consults its routing table.
-4. The packet is forwarded to the destination VLAN.
-5. The destination device receives the packet.
+1. The source device determines the destination is outside its local subnet.
+2. The packet is forwarded to the device's default gateway (SVI).
+3. CORE-SW1 examines the destination IP address.
+4. The routing table is consulted.
+5. The packet is forwarded to the destination VLAN.
+6. The destination device processes the packet and returns a reply.
 
-This routing process is performed entirely by the multilayer switch.
+This process occurs entirely within the multilayer switch.
+
+---
+
+# DHCP Relay Integration
+
+After Inter-VLAN Routing was implemented, centralized DHCP services were added to the enterprise network.
+
+Because DHCP broadcasts cannot cross VLAN boundaries, DHCP Relay was configured on each client VLAN SVI using:
+
+```cisco
+ip helper-address 192.168.50.10
+```
+
+Configured VLANs:
+
+- VLAN 10
+- VLAN 20
+- VLAN 30
+- VLAN 40
+
+The `ip helper-address` command forwards DHCP broadcast requests to the DHCP server located on VLAN 50 while continuing to provide normal Layer 3 routing between VLANs.
 
 ---
 
 # Default Gateway Assignment
 
-Each endpoint was configured to use the SVI within its own subnet as the default gateway.
+Each endpoint uses the SVI within its subnet as its default gateway.
 
 | Department | Default Gateway |
 |------------|-----------------|
@@ -89,13 +111,13 @@ Each endpoint was configured to use the SVI within its own subnet as the default
 | Finance | 192.168.20.1 |
 | Information Technology | 192.168.30.1 |
 | Management | 192.168.40.1 |
-| Server Infrastructure | 192.168.50.1 |
+| Servers | 192.168.50.1 |
 
 ---
 
 # Verification
 
-The following Cisco IOS commands were used to verify the Layer 3 configuration.
+The following Cisco IOS commands were used to verify Layer 3 routing.
 
 ```cisco
 show ip interface brief
@@ -107,23 +129,23 @@ show running-config
 
 Verification confirmed:
 
-- All SVIs configured
-- Gateway interfaces operational
+- All SVIs operational
+- Correct gateway addresses
 - IP routing enabled
 - Connected routes installed
-- Inter-VLAN communication functioning correctly
+- DHCP Relay configured
+- Successful Inter-VLAN communication
 
 ---
 
 # Connectivity Testing
 
-Connectivity testing was performed between devices located in different VLANs.
+Connectivity testing confirmed successful communication between VLANs.
 
-Successful tests included:
+Example tests included:
 
 | Source | Destination | Result |
-|----------|-------------|--------|
-| HR-PC01 | HR-LT01 | Success |
+|---------|-------------|--------|
 | HR-PC01 | FIN-PC01 | Success |
 | HR-PC01 | IT-PC01 | Success |
 | HR-PC01 | MGMT-PC01 | Success |
@@ -131,21 +153,21 @@ Successful tests included:
 | IT-PC01 | SRV-DC01 | Success |
 | MGMT-PC01 | FIN-PC01 | Success |
 
-Successful ping responses confirmed that routing between VLANs was functioning correctly.
+Successful ping responses confirmed that CORE-SW1 was correctly routing traffic between all enterprise VLANs.
+
+---
+
+# Routing Diagram
+
+The following diagram illustrates the logical routing architecture used by the enterprise network.
+
+![Inter-VLAN Routing](../images/vlan/inter-vlan-routing.png)
 
 ---
 
 # Verification Screenshots
 
-Add the following screenshots.
-
-## Gateway Interfaces
-
-```text
-images/verification/show-ip-interface-brief.png
-```
-
-Markdown:
+## Layer 3 Interfaces
 
 ```markdown
 ![SVI Configuration](../images/verification/show-ip-interface-brief.png)
@@ -155,48 +177,38 @@ Markdown:
 
 ## Routing Table
 
-```text
-images/verification/show-ip-route.png
-```
-
-Markdown:
-
 ```markdown
 ![Routing Table](../images/verification/show-ip-route.png)
 ```
 
 ---
 
-## Successful Ping Test
-
-```text
-images/verification/inter-vlan-ping.png
-```
-
-Markdown:
+## Inter-VLAN Connectivity
 
 ```markdown
-![Inter-VLAN Routing Verification](../images/verification/inter-vlan-ping.png)
+![Inter-VLAN Verification](../images/verification/dhcp-intervlan-ping-test.png)
 ```
 
 ---
 
 # Design Benefits
 
-Using a Layer 3 switch for Inter-VLAN Routing provides several advantages.
+Implementing Inter-VLAN Routing on a Layer 3 switch provides:
 
-- High-performance routing
+- High-speed routing between VLANs
+- Reduced network latency
 - Simplified network architecture
-- Reduced latency
 - Centralized gateway management
-- Easy scalability
-- Better support for enterprise services
-- Eliminates Router-on-a-Stick bottlenecks
+- Support for centralized services such as DHCP
+- Improved scalability
+- Enterprise-ready design
 
 ---
 
-# Summary
+# Conclusion
 
-Inter-VLAN Routing was successfully implemented using the Cisco Catalyst 3560 multilayer switch.
+Inter-VLAN Routing was successfully implemented using a Cisco Catalyst 3560 multilayer switch.
 
-Each VLAN received its own Switch Virtual Interface (SVI), allowing the switch to function as the default gateway for every department. After enabling IP routing and configuring the gateway interfaces, devices in different VLANs were able to communicate successfully, providing full end-to-end connectivity throughout the enterprise network.
+Switch Virtual Interfaces (SVIs) provide the default gateway for every department while IP routing enables communication between isolated VLANs. After implementing DHCP Relay using `ip helper-address`, the same Layer 3 infrastructure also supports centralized DHCP services located on the Server VLAN.
+
+This architecture provides a scalable and efficient enterprise design that supports future services such as DNS, Active Directory, Access Control Lists (ACLs), and advanced network security.

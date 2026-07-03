@@ -2,229 +2,199 @@
 
 ## Overview
 
-This document outlines the verification procedures performed after implementing the enterprise network.
+After completing the enterprise network implementation, comprehensive verification testing was performed to validate connectivity, Layer 3 routing, VLAN segmentation, and DHCP functionality.
 
-Verification ensures that the physical topology, VLAN configuration, trunk links, Layer 3 routing, and IPv4 addressing operate correctly before additional services such as DHCP and network security are implemented.
+The objective was to ensure that all devices received the correct network configuration and could communicate successfully across VLAN boundaries.
 
 ---
 
 # Verification Objectives
 
-The verification process confirms the following:
-
-- Physical connectivity is operational
-- VLANs are configured correctly
-- Access ports belong to the correct VLANs
-- Trunk links are operational
-- Switch Virtual Interfaces (SVIs) are active
-- Inter-VLAN Routing is functioning
-- End devices can communicate successfully
-- End-to-end network connectivity has been established
-
----
-
-# Physical Verification
-
-The physical network was inspected after deployment.
-
-Verification confirmed:
-
-- All devices powered on
-- All Ethernet links connected
-- Interface descriptions configured
-- Green link status displayed throughout the topology
-
----
-
-## Enterprise Topology
-
-![Enterprise Network Topology](../images/topology/physical-topology.png)
+- Verify VLAN connectivity
+- Verify Inter-VLAN Routing
+- Verify DHCP lease assignment
+- Verify default gateway configuration
+- Verify DNS assignment
+- Verify end-to-end connectivity
+- Verify Layer 3 switching functionality
 
 ---
 
 # VLAN Verification
 
-The following Cisco IOS command was used to verify VLAN creation and port assignments.
+The following commands were used to verify VLAN configuration on the Layer 3 switch.
 
 ```cisco
 show vlan brief
 ```
 
-Verification confirmed:
+Verified:
 
-- VLAN 10 (HR)
-- VLAN 20 (FINANCE)
-- VLAN 30 (IT)
-- VLAN 40 (MANAGEMENT)
-- VLAN 50 (SERVERS)
-
-All access ports were assigned to their appropriate VLANs.
+- VLAN 10 – Human Resources
+- VLAN 20 – Finance
+- VLAN 30 – Information Technology
+- VLAN 40 – Management
+- VLAN 50 – Servers
 
 ---
 
 # Trunk Verification
 
-The following command verified the trunk links between the core switch and access switches.
+The trunk links between the Core Switch and Access Switches were verified using:
 
 ```cisco
 show interfaces trunk
 ```
 
-Verification confirmed:
+Verified:
 
-- CORE-SW1 ↔ ACC-SW1 trunk operational
-- CORE-SW1 ↔ ACC-SW2 trunk operational
-- CORE-SW1 ↔ ACC-SW3 trunk operational
-
-All configured VLANs were successfully transported across the trunk links.
+- 802.1Q trunk encapsulation
+- Active trunk ports
+- VLAN forwarding across switches
 
 ---
 
-# Layer 3 Verification
+# Layer 3 Interface Verification
 
-The following commands verified Layer 3 functionality.
+SVIs were verified using:
 
 ```cisco
 show ip interface brief
-
-show ip route
 ```
+
+Verified Interfaces:
+
+| Interface | IP Address |
+|-----------|------------|
+| VLAN10 | 192.168.10.1 |
+| VLAN20 | 192.168.20.1 |
+| VLAN30 | 192.168.30.1 |
+| VLAN40 | 192.168.40.1 |
+| VLAN50 | 192.168.50.1 |
+
+All interfaces were operational (Up/Up).
+
+---
+
+# DHCP Verification
+
+The centralized DHCP server successfully assigned IPv4 addresses to client devices.
 
 Verification confirmed:
 
-- All Switch Virtual Interfaces (SVIs) configured
-- Gateway addresses assigned correctly
-- IP routing enabled
-- Connected routes installed for every VLAN
+- Automatic IP address assignment
+- Correct subnet mask
+- Correct default gateway
+- Correct DNS server
+- Successful DHCP lease acquisition
+
+Example DHCP Client Configuration:
+
+- IP Address: 192.168.10.100
+- Subnet Mask: 255.255.255.0
+- Default Gateway: 192.168.10.1
+- DNS Server: 192.168.50.10
+
+---
+
+# DHCP Relay Verification
+
+DHCP Relay was configured on the Layer 3 switch using:
+
+```cisco
+ip helper-address 192.168.50.10
+```
+
+Configured on:
+
+- VLAN 10
+- VLAN 20
+- VLAN 30
+- VLAN 40
+
+This allowed DHCP broadcasts from client VLANs to reach the centralized DHCP server located on VLAN 50.
 
 ---
 
 # Connectivity Testing
 
-End-to-end connectivity was verified using ICMP ping tests.
+Connectivity testing was performed between multiple VLANs.
 
-## Default Gateway Tests
-
-Every endpoint successfully reached its configured default gateway.
-
-Example:
-
-```text
-HR-PC01
-
-↓
-
-192.168.10.1
-
-Successful
-```
-
----
-
-## Same VLAN Tests
-
-Devices within the same VLAN successfully communicated.
-
-Example:
+Example tests included:
 
 | Source | Destination | Result |
-|----------|-------------|--------|
-| HR-PC01 | HR-LT01 | Success |
-| FIN-PC01 | FIN-LT01 | Success |
-| IT-PC01 | IT-PC02 | Success |
+|---------|-------------|--------|
+| HR-PC01 | FIN-PC01 | ✅ Success |
+| HR-PC01 | IT-PC01 | ✅ Success |
+| HR-PC01 | MGMT-PC01 | ✅ Success |
+| HR-PC01 | SRV-DC01 | ✅ Success |
 
----
+Successful replies confirmed:
 
-## Inter-VLAN Tests
+- Correct routing
+- Proper gateway configuration
+- Functional DHCP
+- End-to-end connectivity
 
-Devices located in different VLANs successfully communicated through the Layer 3 switch.
-
-| Source | Destination | Result |
-|----------|-------------|--------|
-| HR-PC01 | FIN-PC01 | Success |
-| HR-PC01 | IT-PC01 | Success |
-| HR-PC01 | MGMT-PC01 | Success |
-| HR-PC01 | SRV-DC01 | Success |
-| IT-PC01 | SRV-DC01 | Success |
-| MGMT-PC01 | FIN-PC01 | Success |
-
-These successful tests confirm that Inter-VLAN Routing is functioning correctly.
+> **Note:** The first ICMP Echo Request timed out during some tests due to ARP resolution. After the destination MAC address was learned, all subsequent ping requests completed successfully. This behavior is expected in Packet Tracer and on Ethernet networks.
 
 ---
 
 # Verification Commands
 
-The following Cisco IOS commands were used throughout the verification process.
+Cisco IOS commands used during validation:
 
 ```cisco
 show vlan brief
-
 show interfaces trunk
-
 show ip interface brief
-
-show ip route
-
 show running-config
+ping
 ```
 
 ---
 
 # Verification Screenshots
 
-The following screenshots should be included.
+## DHCP Server Configuration
 
-## Physical Topology
-
-```markdown
-![Enterprise Topology](../images/topology/physical-topology.png)
-```
+![DHCP Server Configuration](../images/dhcp/dhcp-server-scopes.png)
 
 ---
 
-## VLAN Verification
+## DHCP Client Configuration
 
-```markdown
-![VLAN Verification](../images/vlans/show-vlan-brief.png)
-```
+![DHCP Client Configuration](../images/dhcp/dhcp-client-ip-configuration.png)
 
 ---
 
-## Inter-VLAN Routing
+## Inter-VLAN Connectivity Verification
 
-```markdown
-![Inter-VLAN Routing](../images/verification/inter-vlan-ping.png)
-```
-
----
-
-## Gateway Interfaces
-
-```markdown
-![SVI Configuration](../images/verification/show-ip-interface-brief.png)
-```
+![Inter-VLAN Ping Verification](../images/verification/dhcp-intervlan-ping-test.png)
 
 ---
 
 # Results
 
-The enterprise network successfully passed all verification tests.
+The enterprise network was successfully validated.
 
-Completed verification includes:
+Verified functionality includes:
 
-- ✅ Physical topology
-- ✅ VLAN implementation
-- ✅ Access port assignments
-- ✅ Trunk configuration
-- ✅ Switch Virtual Interfaces
-- ✅ Layer 3 Routing
-- ✅ Static IPv4 Addressing
-- ✅ End-to-end connectivity
+- ✅ VLAN Segmentation
+- ✅ Trunk Links
+- ✅ Layer 3 Switching
+- ✅ Inter-VLAN Routing
+- ✅ Static Infrastructure Addressing
+- ✅ DHCP Server
+- ✅ DHCP Relay (`ip helper-address`)
+- ✅ Automatic Client Address Assignment
+- ✅ Cross-VLAN Connectivity
+- ✅ End-to-End Network Communication
 
 ---
 
 # Conclusion
 
-The enterprise network has been successfully deployed and verified.
+The enterprise network successfully met all design objectives for this phase.
 
-All devices communicate as expected across multiple VLANs using the Cisco Catalyst 3560 multilayer switch for Inter-VLAN Routing. The verified network provides a stable foundation for implementing additional enterprise services, including Windows Server 2022 integration, DHCP, Access Control Lists (ACLs), switch security, and static routing.
+Client devices automatically obtained network configuration from the centralized DHCP server, while the Layer 3 switch routed traffic between VLANs using Switch Virtual Interfaces (SVIs). DHCP Relay enabled clients on separate VLANs to communicate with the DHCP server located in the Servers VLAN, resulting in reliable, automated IP address management and successful end-to-end connectivity throughout the network.
