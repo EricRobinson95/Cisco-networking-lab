@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net">
+<mxfile host="Electron">
   <diagram name="Page-1" id="nrHBfVMkrXwOKs-d-XcE">
-    <mxGraphModel dx="1183" dy="773" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="758" dy="727" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -205,7 +205,7 @@
           <mxGeometry height="30" width="60.62" x="459.07" y="725" as="geometry" />
         </mxCell>
         <mxCell id="XVrmgv3D7Ls_zpOJ7r-V-35" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;fontSize=16;" value="Version: 1.0&lt;div&gt;July 2026&lt;/div&gt;" vertex="1">
-          <mxGeometry height="90" width="170" x="520.31" y="770" as="geometry" />
+          <mxGeometry height="90" width="170" x="540" y="690" as="geometry" />
         </mxCell>
         <mxCell id="XVrmgv3D7Ls_zpOJ7r-V-36" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;fontSize=7;" value="Windows Server 2022" vertex="1">
           <mxGeometry height="25" width="90" x="354.38" y="715" as="geometry" />
