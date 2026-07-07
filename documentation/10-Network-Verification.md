@@ -1,200 +1,305 @@
-# Network Verification
+# 10 - Network Verification
 
 ## Overview
 
-After completing the enterprise network implementation, comprehensive verification testing was performed to validate connectivity, Layer 3 routing, VLAN segmentation, and DHCP functionality.
+After completing the enterprise network configuration, a series of verification tests were performed to validate connectivity, network services, remote management, and security. These tests confirm that the network functions as designed and that all implemented technologies operate correctly.
 
-The objective was to ensure that all devices received the correct network configuration and could communicate successfully across VLAN boundaries.
+The following components were verified:
 
----
-
-# Verification Objectives
-
-- Verify VLAN connectivity
-- Verify Inter-VLAN Routing
-- Verify DHCP lease assignment
-- Verify default gateway configuration
-- Verify DNS assignment
-- Verify end-to-end connectivity
-- Verify Layer 3 switching functionality
+- VLAN Connectivity
+- Inter-VLAN Routing
+- DHCP
+- SSH Remote Management
+- Port Security
 
 ---
 
 # VLAN Verification
 
-The following commands were used to verify VLAN configuration on the Layer 3 switch.
+Each department was assigned to its own VLAN and IP subnet.
+
+| Department | VLAN | Network |
+|------------|------|----------------|
+| HR | 10 | 192.168.10.0/24 |
+| Finance | 20 | 192.168.20.0/24 |
+| IT | 30 | 192.168.30.0/24 |
+| Management | 40 | 192.168.40.0/24 |
+| Servers | 50 | 192.168.50.0/24 |
+
+Verification Commands
 
 ```cisco
 show vlan brief
 ```
 
-Verified:
+Expected Results
 
-- VLAN 10 – Human Resources
-- VLAN 20 – Finance
-- VLAN 30 – Information Technology
-- VLAN 40 – Management
-- VLAN 50 – Servers
+- All VLANs present
+- Access ports assigned correctly
+- End devices located in the proper VLAN
 
 ---
 
 # Trunk Verification
 
-The trunk links between the Core Switch and Access Switches were verified using:
+Trunk links between the Core Layer 3 switch and each access switch were verified.
+
+Verification Commands
 
 ```cisco
 show interfaces trunk
 ```
 
-Verified:
+Expected Results
 
-- 802.1Q trunk encapsulation
-- Active trunk ports
-- VLAN forwarding across switches
+- Trunk ports operational
+- VLANs 10,20,30,40,50 allowed across trunks
+- Inter-switch communication functioning correctly
 
 ---
 
-# Layer 3 Interface Verification
+# Inter-VLAN Routing Verification
 
-SVIs were verified using:
+The Layer 3 switch successfully routed traffic between VLANs.
 
-```cisco
-show ip interface brief
+Gateway Interfaces
+
+| VLAN | Gateway |
+|------|---------------|
+| 10 | 192.168.10.1 |
+| 20 | 192.168.20.1 |
+| 30 | 192.168.30.1 |
+| 40 | 192.168.40.1 |
+| 50 | 192.168.50.1 |
+
+Verification
+
+Each department successfully communicated with devices located in different VLANs.
+
+Example
+
+```text
+HR-PC01
+↓
+
+Default Gateway (192.168.10.1)
+
+↓
+
+CORE-SW1
+
+↓
+
+Finance VLAN
+
+↓
+
+FIN-PC01
 ```
 
-Verified Interfaces:
+Verification Commands
 
-| Interface | IP Address |
-|-----------|------------|
-| VLAN10 | 192.168.10.1 |
-| VLAN20 | 192.168.20.1 |
-| VLAN30 | 192.168.30.1 |
-| VLAN40 | 192.168.40.1 |
-| VLAN50 | 192.168.50.1 |
+```cisco
+show ip route
+```
 
-All interfaces were operational (Up/Up).
+```text
+ping 192.168.20.100
+ping 192.168.30.100
+ping 192.168.40.100
+ping 192.168.50.10
+```
 
 ---
 
 # DHCP Verification
 
-The centralized DHCP server successfully assigned IPv4 addresses to client devices.
+DHCP services were verified for every user VLAN.
+
+Clients automatically received:
+
+- IPv4 Address
+- Subnet Mask
+- Default Gateway
+- DNS Server
+
+Verification confirmed that all clients obtained addresses from the correct DHCP scope.
+
+Verification Commands
+
+```text
+ipconfig
+```
+
+```text
+ipconfig /renew
+```
+
+Verification Images
+
+![DHCP Client](../images/dhcp/dhcp-client-ip-configuration.png)
+
+![DHCP Server Scopes](../images/dhcp/dhcp-server-scopes.png)
+
+---
+
+# Connectivity Verification
+
+End-to-end connectivity was verified using ICMP.
+
+Tests included:
+
+- HR → Finance
+- HR → IT
+- HR → Management
+- HR → Server
+- IT → HR
+- Finance → Management
+
+Initial pings may experience one timeout while ARP tables populate. Subsequent replies were successful.
+
+Verification Image
+
+![Inter-VLAN Ping Test](../images/verification/dhcp-intervlan-ping-test.png)
+
+---
+
+# SSH Verification
+
+SSH Version 2 was verified by remotely connecting to network devices using the configured administrator account.
 
 Verification confirmed:
 
-- Automatic IP address assignment
-- Correct subnet mask
-- Correct default gateway
-- Correct DNS server
-- Successful DHCP lease acquisition
+- SSH Version 2 enabled
+- Local user authentication successful
+- Encrypted remote management
+- Administrative access functioning correctly
 
-Example DHCP Client Configuration:
+Verification Commands
 
-- IP Address: 192.168.10.100
-- Subnet Mask: 255.255.255.0
-- Default Gateway: 192.168.10.1
-- DNS Server: 192.168.50.10
-
----
-
-# DHCP Relay Verification
-
-DHCP Relay was configured on the Layer 3 switch using:
-
-```cisco
-ip helper-address 192.168.50.10
+```text
+ssh -l admin 192.168.40.1
 ```
 
-Configured on:
+```cisco
+show ip ssh
+```
 
-- VLAN 10
-- VLAN 20
-- VLAN 30
-- VLAN 40
+Verification Image
 
-This allowed DHCP broadcasts from client VLANs to reach the centralized DHCP server located on VLAN 50.
-
----
-
-# Connectivity Testing
-
-Connectivity testing was performed between multiple VLANs.
-
-Example tests included:
-
-| Source | Destination | Result |
-|---------|-------------|--------|
-| HR-PC01 | FIN-PC01 | ✅ Success |
-| HR-PC01 | IT-PC01 | ✅ Success |
-| HR-PC01 | MGMT-PC01 | ✅ Success |
-| HR-PC01 | SRV-DC01 | ✅ Success |
-
-Successful replies confirmed:
-
-- Correct routing
-- Proper gateway configuration
-- Functional DHCP
-- End-to-end connectivity
-
-> **Note:** The first ICMP Echo Request timed out during some tests due to ARP resolution. After the destination MAC address was learned, all subsequent ping requests completed successfully. This behavior is expected in Packet Tracer and on Ethernet networks.
+![SSH Verification](../images/security/ssh-remote-management-verification.png)
 
 ---
 
-# Verification Commands
+# Port Security Verification
 
-Cisco IOS commands used during validation:
+Port Security functionality was tested by replacing an authorized workstation with an unauthorized device.
+
+Expected Behavior
+
+1. Authorized device disconnected.
+2. Unauthorized device connected.
+3. Switch detected a different MAC address.
+4. Port entered Secure-Shutdown state.
+5. Unauthorized device lost network connectivity.
+
+Verification confirmed:
+
+- Port Security Enabled
+- Sticky MAC Address Learned
+- Security Violation Count Incremented
+- Port Status changed to Secure-Shutdown
+
+Verification Commands
+
+```cisco
+show port-security interface FastEthernet0/2
+```
+
+```cisco
+show port-security address
+```
+
+Verification Images
+
+![Port Security Topology](../images/security/port-security-violation-topology.png)
+
+![Port Security CLI](../images/security/port-security-violation-cli.png)
+
+---
+
+# Device Verification Commands
+
+## Switch Verification
 
 ```cisco
 show vlan brief
 show interfaces trunk
+show mac address-table
 show ip interface brief
 show running-config
-ping
 ```
 
 ---
 
-# Verification Screenshots
+## Layer 3 Switch Verification
 
-## DHCP Server Configuration
-
-![DHCP Server Configuration](../images/dhcp/dhcp-server-scopes.png)
-
----
-
-## DHCP Client Configuration
-
-![DHCP Client Configuration](../images/dhcp/dhcp-client-ip-configuration.png)
+```cisco
+show ip route
+show ip interface brief
+show running-config
+```
 
 ---
 
-## Inter-VLAN Connectivity Verification
+## DHCP Verification
 
-![Inter-VLAN Ping Verification](../images/verification/dhcp-intervlan-ping-test.png)
+```text
+ipconfig
+ipconfig /renew
+```
 
 ---
 
-# Results
+## SSH Verification
 
-The enterprise network was successfully validated.
+```text
+ssh -l admin <device-ip>
+```
 
-Verified functionality includes:
+```cisco
+show ip ssh
+```
 
-- ✅ VLAN Segmentation
-- ✅ Trunk Links
-- ✅ Layer 3 Switching
-- ✅ Inter-VLAN Routing
-- ✅ Static Infrastructure Addressing
-- ✅ DHCP Server
-- ✅ DHCP Relay (`ip helper-address`)
-- ✅ Automatic Client Address Assignment
-- ✅ Cross-VLAN Connectivity
-- ✅ End-to-End Network Communication
+---
+
+## Port Security Verification
+
+```cisco
+show port-security interface FastEthernet0/2
+show port-security address
+```
+
+---
+
+# Verification Summary
+
+| Feature | Status |
+|----------|--------|
+| VLAN Configuration | ✅ Verified |
+| Trunk Links | ✅ Verified |
+| Inter-VLAN Routing | ✅ Verified |
+| DHCP | ✅ Verified |
+| End-to-End Connectivity | ✅ Verified |
+| SSH Remote Management | ✅ Verified |
+| Port Security | ✅ Verified |
+| Sticky MAC Learning | ✅ Verified |
+| Security Violation Testing | ✅ Verified |
 
 ---
 
 # Conclusion
 
-The enterprise network successfully met all design objectives for this phase.
+Comprehensive verification confirmed that the enterprise network operates as designed. VLAN segmentation, trunking, Layer 3 routing, DHCP, and end-to-end connectivity function correctly across all departments. Security testing demonstrated successful SSH remote management and effective Port Security enforcement, including automatic shutdown of an access port when an unauthorized device attempted to connect.
 
-Client devices automatically obtained network configuration from the centralized DHCP server, while the Layer 3 switch routed traffic between VLANs using Switch Virtual Interfaces (SVIs). DHCP Relay enabled clients on separate VLANs to communicate with the DHCP server located in the Servers VLAN, resulting in reliable, automated IP address management and successful end-to-end connectivity throughout the network.
+These verification results validate that the network is fully operational, securely managed, and follows enterprise networking best practices.

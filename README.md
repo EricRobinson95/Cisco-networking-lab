@@ -1,183 +1,229 @@
-# Cisco Enterprise Networking Lab
+# Enterprise Cisco Networking Lab
 
-A hands-on enterprise networking project built in Cisco Packet Tracer to demonstrate core networking concepts, Layer 2 and Layer 3 switching, VLAN segmentation, DHCP deployment, and enterprise network documentation.
+A comprehensive enterprise networking lab built in Cisco Packet Tracer that demonstrates core networking concepts, Layer 2 and Layer 3 switching, network segmentation, DHCP, secure remote management, and enterprise security.
+
+This project simulates a small business environment with multiple departments connected through a Layer 3 core switch, providing secure communication, centralized network services, and enterprise-grade security features.
 
 ---
 
-# Project Overview
+# Project Objectives
 
-This lab simulates a small enterprise environment with multiple departments connected through a hierarchical network design.
+- Design a scalable enterprise network
+- Implement VLAN segmentation
+- Configure trunk links between switches
+- Configure Inter-VLAN Routing using a Layer 3 switch
+- Deploy centralized DHCP services
+- Secure remote device management using SSH
+- Secure access-layer ports using Port Security
+- Verify enterprise network connectivity
+- Document configurations and verification procedures
 
-The project focuses on implementing enterprise networking best practices while documenting every phase of deployment, verification, and troubleshooting.
+---
+
+# Network Topology
+
+The lab consists of:
+
+- 1 Edge Router (RTR1)
+- 1 Layer 3 Core Switch (CORE-SW1)
+- 3 Access Layer Switches
+- Multiple Department VLANs
+- DHCP/DNS Server
+- Department Workstations and Laptops
+
+Department VLANs:
+
+| Department | VLAN | Network |
+|------------|------|----------------|
+| HR | 10 | 192.168.10.0/24 |
+| Finance | 20 | 192.168.20.0/24 |
+| IT | 30 | 192.168.30.0/24 |
+| Management | 40 | 192.168.40.0/24 |
+| Servers | 50 | 192.168.50.0/24 |
+
+---
+
+# Features
+
+### Enterprise Network Design
+
+- Hierarchical network topology
+- Layer 2 Access Layer
+- Layer 3 Core Layer
+- Structured VLAN design
+- Department segmentation
+
+### Layer 2 Switching
+
+- VLAN Configuration
+- Access Ports
+- 802.1Q Trunking
+- MAC Address Learning
+
+### Layer 3 Switching
+
+- Switched Virtual Interfaces (SVIs)
+- Inter-VLAN Routing
+- Default Gateway Configuration
+- Routing Verification
+
+### Network Services
+
+- Centralized DHCP Server
+- DHCP Address Pools
+- DHCP Relay
+- DNS Configuration
+- Automatic Client Address Assignment
+
+### Network Security
+
+- SSH Version 2
+- RSA Key Generation
+- Local User Authentication
+- Enable Secret
+- Password Encryption
+- Login Banner (MOTD)
+- Port Security
+- Sticky MAC Address Learning
+- Secure Remote Management
+
+### Verification & Testing
+
+- VLAN Verification
+- Trunk Verification
+- DHCP Verification
+- Inter-VLAN Connectivity Testing
+- SSH Verification
+- Port Security Violation Testing
+
+---
+
+# Project Structure
+
+```
+Cisco-networking-lab/
+│
+├── configurations/
+│   ├── router/
+│   └── switches/
+│
+├── diagrams/
+│
+├── documentation/
+│   ├── 01-Lab-Overview.md
+│   ├── 02-Network-Design.md
+│   ├── 03-IP-Addressing.md
+│   ├── 04-VLAN-Configuration.md
+│   ├── 05-InterVLAN-Routing.md
+│   ├── 06-DHCP.md
+│   ├── 07-Static-Routing.md
+│   ├── 08-Network-Security.md
+│   ├── 09-Access-Control-Lists.md
+│   └── 10-Network-Verification.md
+│
+├── images/
+│   ├── topology/
+│   ├── vlan/
+│   ├── dhcp/
+│   ├── security/
+│   └── verification/
+│
+├── packet-tracer/
+│
+├── README.md
+└── LICENSE
+```
 
 ---
 
 # Technologies Used
 
 - Cisco Packet Tracer
-- Cisco Catalyst 3560 Layer 3 Switch
-- Cisco Catalyst 2960 Access Switches
-- Cisco 2911 Router
+- Cisco IOS
+- Layer 2 Switching
+- Layer 3 Switching
 - VLANs
 - 802.1Q Trunking
 - Inter-VLAN Routing
-- Static IP Addressing
 - DHCP
-- DHCP Relay (`ip helper-address`)
-- Draw.io
-- Git
-- GitHub
-- VS Code
+- DHCP Relay
+- SSH Version 2
+- RSA Encryption
+- Port Security
+- Sticky MAC Address Learning
 
 ---
 
-# Enterprise Network Topology
+# Skills Demonstrated
 
-## Physical Topology
-
-![Physical Topology](images/topology/physical-topology.png)
-
----
-
-## Inter-VLAN Routing
-
-![Inter-VLAN Routing](images/vlan/inter-vlan-routing.png)
-
----
-
-# Network Design
-
-The enterprise network consists of:
-
-- 1 Cisco 2911 Edge Router
-- 1 Cisco Catalyst 3560 Layer 3 Core Switch
-- 3 Cisco Catalyst 2960 Access Switches
-- Windows Server (Packet Tracer Server)
-- Multiple department PCs and laptops
-
-Departments include:
-
-- Human Resources
-- Finance
-- Information Technology
-- Management
-- Servers
+- Enterprise Network Design
+- VLAN Segmentation
+- Layer 2 Switching
+- Layer 3 Switching
+- Inter-VLAN Routing
+- DHCP Configuration
+- DHCP Relay Configuration
+- Network Security
+- Secure Remote Administration
+- Cisco IOS Configuration
+- Network Verification
+- Network Troubleshooting
+- Enterprise Documentation
 
 ---
 
-# VLAN Design
+# Verification
 
-| VLAN | Department | Network | Gateway |
-|------:|------------|----------------|----------------|
-| 10 | HR | 192.168.10.0/24 | 192.168.10.1 |
-| 20 | Finance | 192.168.20.0/24 | 192.168.20.1 |
-| 30 | IT | 192.168.30.0/24 | 192.168.30.1 |
-| 40 | Management | 192.168.40.0/24 | 192.168.40.1 |
-| 50 | Servers | 192.168.50.0/24 | 192.168.50.1 |
+The following functionality has been successfully tested:
 
----
-
-# Current Features
-
-✅ Physical Enterprise Topology
-
-✅ Layer 2 Switching
-
-✅ Layer 3 Switching
-
-✅ VLAN Segmentation
-
-✅ Access Port Configuration
-
-✅ 802.1Q Trunk Links
-
-✅ Interface Descriptions
-
-✅ Inter-VLAN Routing
-
-✅ Static IP Addressing
-
-✅ DHCP Server Configuration
-
-✅ DHCP Relay (`ip helper-address`)
-
-✅ End-to-End Network Verification
+- VLAN communication
+- Inter-VLAN Routing
+- DHCP address assignment
+- DHCP relay forwarding
+- SSH remote administration
+- Secure login authentication
+- Port Security
+- Sticky MAC learning
+- Unauthorized device detection
+- Automatic Secure-Shutdown during Port Security violations
 
 ---
 
 # Documentation
 
-| File | Description |
-|------|-------------|
-| 01-Lab-Overview.md | Project overview and objectives |
-| 02-Networking-Design.md | Enterprise network architecture |
-| 03-IP-Addressing.md | IP addressing plan |
-| 04-VLAN-Configuration.md | VLAN creation and access ports |
-| 05-InterVLAN-Routing.md | Layer 3 switching and routing |
-| 06-DHCP.md | DHCP server and relay configuration |
-| 10-Network-Verification.md | Connectivity and verification testing |
+Detailed implementation guides are included for every major phase of the project:
+
+- Lab Overview
+- Network Design
+- IP Addressing
+- VLAN Configuration
+- Inter-VLAN Routing
+- DHCP Configuration
+- Static Routing
+- Network Security
+- Access Control Lists *(planned)*
+- Network Verification
 
 ---
 
-# Repository Structure
+# Future Improvements
 
-```
-Cisco-networking-lab/
-│
-├── configurations/
-├── diagrams/
-├── images/
-├── packet-tracer/
-├── documentation/
-└── README.md
-```
+Planned enhancements include:
 
----
-
-# Verification Completed
-
-- Successful DHCP lease assignment
-- Successful Inter-VLAN Routing
-- Cross-VLAN connectivity
-- DHCP Relay functionality
-- Gateway verification
-- DNS assignment verification
+- Standard and Extended ACLs
+- NAT/PAT
+- Internet Connectivity
+- Syslog
+- NTP
+- SNMP
+- EtherChannel
+- HSRP
+- Dynamic Routing (OSPF)
+- IPv6
+- Network Monitoring
 
 ---
 
-# Project Status
+# License
 
-| Phase | Status |
-|--------|--------|
-| Enterprise Topology | ✅ Complete |
-| VLAN Configuration | ✅ Complete |
-| Inter-VLAN Routing | ✅ Complete |
-| Static IP Addressing | ✅ Complete |
-| DHCP Deployment | ✅ Complete |
-| Network Verification | ✅ Complete |
-| Network Security | ⏳ Upcoming |
-| ACL Implementation | ⏳ Upcoming |
-| Final Validation | ⏳ Upcoming |
-
----
-
-# Future Enhancements
-
-- SSH Remote Management
-- Switch Hardening
-- Port Security
-- Access Control Lists (ACLs)
-- DNS Services
-- Active Directory
-- Windows Server Integration
-- Enterprise Security Best Practices
-
----
-
-# Author
-
-Eric Robinson
-
-Networking Portfolio Project
-
-Built to demonstrate enterprise networking skills using Cisco technologies, GitHub documentation, and infrastructure design.
+This project is licensed under the MIT License.
